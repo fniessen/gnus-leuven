@@ -27,7 +27,7 @@ http://koldfront.dk/text/gnus-email-basic-usage.html
 #+begin_src emacs-lisp :noweb yes
 ;;; gnus-leuven.el --- my Gnus config file
 
-;; Copyright (C) 2004-2019 Fabrice Niessen
+;; Copyright (C) 2004-2020 Fabrice Niessen
 
 ;; Author: Fabrice Niessen <(concat "fniessen" at-sign "pirilampo.org")>
 ;; URL: https://github.com/fniessen/emacs-leuven-theme
@@ -87,7 +87,7 @@ http://koldfront.dk/text/gnus-email-basic-usage.html
 #+end_src
 
 #+begin_src emacs-lisp
-(message "* Load Gnus Leuven")
+(message "[* Load Gnus Leuven]")
 
 ;;* Loading
 
@@ -118,7 +118,7 @@ defined).
             t)                          ; Necessary for correct behavior in
                                         ; conditional expressions.
         (file-error
-         (message "Requiring `%s'... missing" feature)
+         (message "[Requiring `%s'... missing]" feature)
          nil))))
 #+end_src
 
@@ -136,7 +136,7 @@ See http://www.emacswiki.org/emacs/GnusEncryptedAuthInfo.
 #+begin_src emacs-lisp
 ;;* 1 (info "(gnus)Starting Up") Gnus
 
-  (message "1 Starting Gnus...")
+  (message "[1 Starting Gnus...]")
 
   ;; Support for `.authinfo' file.
   (when (try-require 'auth-source)
@@ -204,7 +204,7 @@ that it does not interfere with your own configuration...
                                         ; XXX when (try-require 'bbdb-gnus)...
                      ))
 
-    (message "WARN- SMTP Server NOT configured!")
+    (message "[WARN- SMTP Server NOT configured!]")
     ;; Sleep 1.5 s so that you can see the warning.
     (sit-for 1.5)
     (setq gnus-select-method '(nnnil "")))
@@ -310,7 +310,7 @@ directly afterward...
   ;;  Gnus will only know about the groups in my `.newsrc' file
   (setq gnus-read-active-file nil)      ; Speed-up.
 
-  (message "1 Starting Gnus... Done")
+  (message "[1 Starting Gnus... Done]")
 #+end_src
 
 * Group Buffer
@@ -318,7 +318,7 @@ directly afterward...
 #+begin_src emacs-lisp
 ;;* 2 (info "(gnus)The Group Buffer")
 
-  (message "2 Group Buffer...")
+  (message "[2 Group Buffer...]")
 #+end_src
 
 ** Group Buffer Format
@@ -443,7 +443,7 @@ Cleanup all Gnus buffers on exit.
 #+end_src
 
 #+begin_src emacs-lisp
-  (message "2 Group Buffer... Done")
+  (message "[2 Group Buffer... Done]")
 #+end_src
 
 * Summary buffer
@@ -451,7 +451,7 @@ Cleanup all Gnus buffers on exit.
 #+begin_src emacs-lisp
 ;;* 3 (info "(gnus)The Summary Buffer")
 
-  (message "3 Summary Buffer...")
+  (message "[3 Summary Buffer...]")
 #+end_src
 
 ** Summary Buffer Format
@@ -929,7 +929,7 @@ stripe background is superimposed on my "read" background.
 #+end_src
 
 #+begin_src emacs-lisp
-  (message "3 Summary Buffer... Done")
+  (message "[3 Summary Buffer... Done]")
 #+end_src
 
 * Article Buffer
@@ -937,7 +937,7 @@ stripe background is superimposed on my "read" background.
 #+begin_src emacs-lisp
 ;;* 4 (info "(gnus)The Article Buffer")
 
-  (message "4 Article Buffer...")
+  (message "[4 Article Buffer...]")
 #+end_src
 
 ** Hiding headers
@@ -998,7 +998,7 @@ stripe background is superimposed on my "read" background.
 
 ;;** 4.2 (info "(gnus)Using MIME")
 
-  (message "Emacs MIME...")
+  (message "[Emacs MIME...]")
 #+end_src
 
 #+begin_note
@@ -1140,7 +1140,7 @@ Toggle coloring from HTML emails:
 #+end_src
 
 #+begin_src emacs-lisp
-  (message "4 Article Buffer... Done")
+  (message "[4 Article Buffer... Done]")
 #+end_src
 
 * Composing Messages
@@ -1148,7 +1148,7 @@ Toggle coloring from HTML emails:
 #+begin_src emacs-lisp
 ;;* 5 (info "(gnus)Composing Messages")
 
-  (message "5 Composing Messages...")
+  (message "[5 Composing Messages...]")
 #+end_src
 
 ** Mail
@@ -1358,7 +1358,7 @@ header line of the current post.
 #+end_src
 
 #+begin_src emacs-lisp
-  (message "5 Composing Messages... Done")
+  (message "[5 Composing Messages... Done]")
 #+end_src
 
 * Message
@@ -1369,7 +1369,7 @@ Gnus and RMail, at least).
 #+begin_src emacs-lisp
 ;;* (info "(message)Top")
 
-  (message "Message...")
+  (message "[Message...]")
 #+end_src
 
 ** Interface
@@ -1587,7 +1587,7 @@ See http://www.emacswiki.org/emacs/AutoDictionaryMode.
   ;; Kill message buffer after sending a message.
   (setq message-kill-buffer-on-exit t)
 
-  (message "Message... Done")
+  (message "[Message... Done]")
 #+end_src
 
 * Select Methods
@@ -1595,7 +1595,7 @@ See http://www.emacswiki.org/emacs/AutoDictionaryMode.
 #+begin_src emacs-lisp
 ;;* 6 (info "(gnus)Select Methods")
 
-  (message "6 Select Methods...")
+  (message "[6 Select Methods...]")
 #+end_src
 
 ** Getting News
@@ -1835,7 +1835,7 @@ nnmail keeps a cache of  Message-IDs to discover mail duplicates.
   (setq gnus-agent nil)                 ; Prevent being unable to delete some
                                         ; mails from your inbox.
 
-  (message "6 Select Methods... Done")
+  (message "[6 Select Methods... Done]")
 #+end_src
 
 * Scoring
@@ -1846,7 +1846,7 @@ of the score file local for the group) by pressing ~M-i a I~ or ~M-i a L~.
 #+begin_src emacs-lisp :tangle no
 ;;* 7 (info "(gnus)Scoring")
 
-  (message "7 Scoring...")
+  (message "[7 Scoring...]")
 
   ;; ;; Directory where kill and score files will be stored.
   ;; (setq gnus-kill-files-directory "~/")
@@ -1856,7 +1856,7 @@ of the score file local for the group) by pressing ~M-i a I~ or ~M-i a L~.
   ;; (add-hook 'message-sent-hook 'gnus-score-followup-article)
   ;; (add-hook 'message-sent-hook 'gnus-score-followup-thread) ; Cool trick.
 
-  (message "7 Scoring... Done")
+  (message "[7 Scoring... Done]")
 #+end_src
 
 ** From Sacha Chua
@@ -1899,7 +1899,7 @@ It comes with Gnus.  You don't even need to configure anything for searching
 #+begin_src emacs-lisp
 ;;* 9 (info "(gnus)Various")
 
-  (message "9 Various...")
+  (message "[9 Various...]")
 #+end_src
 
 ** Interactive
@@ -2003,7 +2003,7 @@ It comes with Gnus.  You don't even need to configure anything for searching
   ;; Display more messages from the Gnus back-ends.
   (setq gnus-verbose-backends 10)
 
-  (message "9 Various... Done")
+  (message "[9 Various... Done]")
 #+end_src
 
 ** Missing packages
@@ -2011,7 +2011,7 @@ It comes with Gnus.  You don't even need to configure anything for searching
 #+begin_src emacs-lisp
   ;; Warn that some packages were missing.
   (dolist (pkg leuven--missing-packages)
-    (message "WARN- Package `%s' not found" pkg))
+    (message "[WARN- Package `%s' not found]" pkg))
 
   (message "\n")
 #+end_src

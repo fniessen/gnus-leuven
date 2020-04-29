@@ -1,17 +1,17 @@
 ;;; gnus-leuven.el --- my Gnus config file
 
-;; Copyright (C) 2004-2019 Fabrice Niessen
+;; Copyright (C) 2004-2020 Fabrice Niessen
 
 ;; Author: Fabrice Niessen <(concat "fniessen" at-sign "pirilampo.org")>
 ;; URL: https://github.com/fniessen/emacs-leuven-theme
-;; Version: 20200429.0954
+;; Version: 20200429.1026
 ;; Keywords: emacs, gnus, dotfile, config
 
 ;;; Code:
 
 ;; This file is only provided as an example. Customize it to your own taste!
 
-(message "* Load Gnus Leuven")
+(message "[* Load Gnus Leuven]")
 
 ;;* Loading
 
@@ -34,12 +34,12 @@
             t)                          ; Necessary for correct behavior in
                                         ; conditional expressions.
         (file-error
-         (message "Requiring `%s'... missing" feature)
+         (message "[Requiring `%s'... missing]" feature)
          nil))))
 
 ;;* 1 (info "(gnus)Starting Up") Gnus
 
-  (message "1 Starting Gnus...")
+  (message "[1 Starting Gnus...]")
 
   ;; Support for `.authinfo' file.
   (when (try-require 'auth-source)
@@ -65,7 +65,7 @@
                                         ; XXX when (try-require 'bbdb-gnus)...
                      ))
 
-    (message "WARN- SMTP Server NOT configured!")
+    (message "[WARN- SMTP Server NOT configured!]")
     ;; Sleep 1.5 s so that you can see the warning.
     (sit-for 1.5)
     (setq gnus-select-method '(nnnil "")))
@@ -117,11 +117,11 @@
   ;;  Gnus will only know about the groups in my `.newsrc' file
   (setq gnus-read-active-file nil)      ; Speed-up.
 
-  (message "1 Starting Gnus... Done")
+  (message "[1 Starting Gnus... Done]")
 
 ;;* 2 (info "(gnus)The Group Buffer")
 
-  (message "2 Group Buffer...")
+  (message "[2 Group Buffer...]")
 
 ;;** 2.1 (info "(gnus)Group Buffer Format")
 
@@ -218,11 +218,11 @@
   ;; Keep track of when I last read a group.
   (add-hook 'gnus-select-group-hook 'gnus-group-set-timestamp)
 
-  (message "2 Group Buffer... Done")
+  (message "[2 Group Buffer... Done]")
 
 ;;* 3 (info "(gnus)The Summary Buffer")
 
-  (message "3 Summary Buffer...")
+  (message "[3 Summary Buffer...]")
 
 ;;** 3.1 (info "(gnus)Summary Buffer Format")
 
@@ -503,11 +503,11 @@
                 ;; (unless (gnus-news-group-p gnus-newsgroup-name)
                 (stripe-alternate))))
 
-  (message "3 Summary Buffer... Done")
+  (message "[3 Summary Buffer... Done]")
 
 ;;* 4 (info "(gnus)The Article Buffer")
 
-  (message "4 Article Buffer...")
+  (message "[4 Article Buffer...]")
 
 ;;* (info "(emacs-mime)Top")
 
@@ -595,11 +595,11 @@
   (define-key gnus-article-mode-map
     (kbd "C-c C-f") 'gnus-summary-mail-forward)
 
-  (message "4 Article Buffer... Done")
+  (message "[4 Article Buffer... Done]")
 
 ;;* 5 (info "(gnus)Composing Messages")
 
-  (message "5 Composing Messages...")
+  (message "[5 Composing Messages...]")
 
 ;;** 5.1 (info "(gnus)Mail")
 
@@ -737,11 +737,11 @@
 
   (add-hook 'message-send-hook 'leuven-message-add-content)
 
-  (message "5 Composing Messages... Done")
+  (message "[5 Composing Messages... Done]")
 
 ;;* (info "(message)Top")
 
-  (message "Message...")
+  (message "[Message...]")
 
 ;;** 1 (info "(message)Interface")
 
@@ -903,11 +903,11 @@
   ;; Kill message buffer after sending a message.
   (setq message-kill-buffer-on-exit t)
 
-  (message "Message... Done")
+  (message "[Message... Done]")
 
 ;;* 6 (info "(gnus)Select Methods")
 
-  (message "6 Select Methods...")
+  (message "[6 Select Methods...]")
 
 ;;** 6.3 (info "(gnus)Using IMAP")
 
@@ -941,7 +941,7 @@
 
 ;;* 9 (info "(gnus)Various")
 
-  (message "9 Various...")
+  (message "[9 Various...]")
 
 ;;** 9.2 (info "(gnus)Interactive")
 
@@ -994,11 +994,11 @@
   ;; Display more messages from the Gnus back-ends.
   (setq gnus-verbose-backends 10)
 
-  (message "9 Various... Done")
+  (message "[9 Various... Done]")
 
   ;; Warn that some packages were missing.
   (dolist (pkg leuven--missing-packages)
-    (message "WARN- Package `%s' not found" pkg))
+    (message "[WARN- Package `%s' not found]" pkg))
 
   (message "\n")
 
