@@ -6,7 +6,7 @@
 #+LANGUAGE:  en
 #+OPTIONS:   H:4 num:nil
 
-#+PROPERTY:  header-args :eval never :padline yes :tangle yes
+#+PROPERTY:  header-args :eval never :padline yes :tangle gnus-leuven.el
 
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
 
@@ -880,7 +880,7 @@ replies to an article before younger replies.
 The following does work, but hides the read background for read postings, as the
 stripe background is superimposed on my "read" background.
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle gnus-leuven.el
   ;; The color of the stripes is obtained by dimming the frame background color.
   (defvar stripe-intensity 12
     "*Intensity of the shade. Used to compute the color of the stripes.

@@ -4,7 +4,7 @@
 
 ;; Author: Fabrice Niessen <(concat "fniessen" at-sign "pirilampo.org")>
 ;; URL: https://github.com/fniessen/emacs-leuven-theme
-;; Version: 20200310.1615
+;; Version: 20200429.0954
 ;; Keywords: emacs, gnus, dotfile, config
 
 ;;; Code:
