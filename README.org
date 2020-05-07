@@ -398,7 +398,7 @@ Cleanup all Gnus buffers on exit.
             (gnus-group-exit)))))
 
   ;; ... before exiting Emacs (not leaving auto-save files around).
-  (add-hook 'kill-emacs-hook 'leuven--exit-gnus)
+  (add-hook 'kill-emacs-hook #'leuven--exit-gnus)
 #+end_src
 
 ** Group Topics
@@ -407,7 +407,7 @@ Cleanup all Gnus buffers on exit.
 ;;** 2.16 (info "(gnus)Group Topics")
 
   ;; Permanently enable the topic mode.
-  (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+  (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
 
   ;; Remove the binding of `C-c C-x', used by Org clocking commands.
   (add-hook 'gnus-topic-mode-hook
@@ -435,11 +435,10 @@ Cleanup all Gnus buffers on exit.
 
 #+begin_src emacs-lisp
   ;; Jump to the first group with unread articles, after getting new news.
-  (add-hook 'gnus-after-getting-new-news-hook
-            'gnus-group-first-unread-group)
+  (add-hook 'gnus-after-getting-new-news-hook #'gnus-group-first-unread-group)
 
   ;; Keep track of when I last read a group.
-  (add-hook 'gnus-select-group-hook 'gnus-group-set-timestamp)
+  (add-hook 'gnus-select-group-hook #'gnus-group-set-timestamp)
 #+end_src
 
 #+begin_src emacs-lisp
@@ -752,7 +751,7 @@ replies to an article before younger replies.
 ;;** 3.18 (info "(gnus)Article Treatment")
 
   ;; Change a `\205' figure to "...".
-  (add-hook 'gnus-part-display-hook 'article-treat-dumbquotes)
+  (add-hook 'gnus-part-display-hook #'article-treat-dumbquotes)
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1232,7 +1231,7 @@ header in the ~message-send-hook~.
             (if (not (equal delete group))
                 (message-add-header (concat "Gcc: " group)))))))
 
-  (add-hook 'message-send-hook 'leuven-choose-gcc)
+  (add-hook 'message-send-hook #'leuven-choose-gcc)
 #+end_src
 
 I use it in such a way that, in all my IMAP mail groups, mails I write
@@ -1251,7 +1250,7 @@ automatically end up in the group I wrote from.
   ;; An alternative to `gnus-posting-styles', if you want to change accounts
   ;; on the fly while composing messages.
   (autoload 'gnus-alias-determine-identity "gnus-alias" nil t)
-  (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+  (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
 
   (with-eval-after-load "gnus-alias"
 
@@ -1333,7 +1332,7 @@ automatically end up in the group I wrote from.
     ;;                 (message-field-value "from")))))
     ;;       (setq mail-envelope-from from)))
 
-    (add-hook 'message-setup-hook 'leuven-set-msg-envelope-from)
+    (add-hook 'message-setup-hook #'leuven-set-msg-envelope-from)
     )
 #+end_src
 
@@ -1354,7 +1353,7 @@ header line of the current post.
     ;; For Gmane address obfuscation.
     (message-add-header "X-Archive: encrypt"))
 
-  (add-hook 'message-send-hook 'leuven-message-add-content)
+  (add-hook 'message-send-hook #'leuven-message-add-content)
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1567,10 +1566,6 @@ See http://www.emacswiki.org/emacs/AutoDictionaryMode.
     ;; Turn on the Org mode table editor (in emails).
     (turn-on-orgtbl)
 
-    ;; ;; Turn on Org-like lists in non-Org buffers.
-    ;; (when (fboundp 'orgalist-mode)
-    ;;   (orgalist-mode 1))
-
     (when (try-require 'org-footnote)
       ;; Default style used for footnoting is local to the Message being
       ;; written.
@@ -1580,7 +1575,11 @@ See http://www.emacswiki.org/emacs/AutoDictionaryMode.
       (set (make-local-variable
             'org-footnote-tag-for-non-org-mode-files) nil)))
 
-    (add-hook 'message-mode-hook 'leuven--message-mode-hook 'append)
+    (add-hook 'message-mode-hook #'leuven--message-mode-hook 'append)
+
+    ;; Turn on Org-like lists in non-Org buffers.
+    (when (fboundp 'orgalist-mode)
+      (add-hook 'message-mode-hook #'orgalist-mode))
 
 ;;*** 3.9 (info "(message)Message Buffers")
 
@@ -1619,7 +1618,7 @@ Newsgroups in which I'm interested:
 ;;*** 6.2.1 (info "(gnus)NNTP")
 
   ;; Required when posting to an authenticated news server.
-  (add-hook 'nntp-server-opened-hook 'nntp-send-authinfo)
+  (add-hook 'nntp-server-opened-hook #'nntp-send-authinfo)
 
   ;; Number of seconds to wait before an nntp connection times out.
   (setq nntp-connection-timeout 5)
@@ -1853,8 +1852,8 @@ of the score file local for the group) by pressing ~M-i a I~ or ~M-i a L~.
 
   ;; ;; Increase score of messages that are replies to my own postings.
   ;; ;; TODO only for newsgroups (and not for mails)!
-  ;; (add-hook 'message-sent-hook 'gnus-score-followup-article)
-  ;; (add-hook 'message-sent-hook 'gnus-score-followup-thread) ; Cool trick.
+  ;; (add-hook 'message-sent-hook #'gnus-score-followup-article)
+  ;; (add-hook 'message-sent-hook #'gnus-score-followup-thread) ; Cool trick.
 
   (message "[7 Scoring... Done]")
 #+end_src
@@ -1985,7 +1984,7 @@ It comes with Gnus.  You don't even need to configure anything for searching
 
   (with-eval-after-load "dired"
 
-    (add-hook 'dired-mode-hook 'gnus-dired-mode)
+    (add-hook 'dired-mode-hook #'gnus-dired-mode)
 
     (define-key dired-mode-map
       (kbd "a") 'gnus-dired-attach))    ; XXX conflict with

@@ -4,7 +4,7 @@
 
 ;; Author: Fabrice Niessen <(concat "fniessen" at-sign "pirilampo.org")>
 ;; URL: https://github.com/fniessen/emacs-leuven-theme
-;; Version: 20200429.1026
+;; Version: 20200507.0741
 ;; Keywords: emacs, gnus, dotfile, config
 
 ;;; Code:
@@ -187,12 +187,12 @@
             (gnus-group-exit)))))
 
   ;; ... before exiting Emacs (not leaving auto-save files around).
-  (add-hook 'kill-emacs-hook 'leuven--exit-gnus)
+  (add-hook 'kill-emacs-hook #'leuven--exit-gnus)
 
 ;;** 2.16 (info "(gnus)Group Topics")
 
   ;; Permanently enable the topic mode.
-  (add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+  (add-hook 'gnus-group-mode-hook #'gnus-topic-mode)
 
   ;; Remove the binding of `C-c C-x', used by Org clocking commands.
   (add-hook 'gnus-topic-mode-hook
@@ -212,11 +212,10 @@
                   (kbd "C-c C-x") nil))))
 
   ;; Jump to the first group with unread articles, after getting new news.
-  (add-hook 'gnus-after-getting-new-news-hook
-            'gnus-group-first-unread-group)
+  (add-hook 'gnus-after-getting-new-news-hook #'gnus-group-first-unread-group)
 
   ;; Keep track of when I last read a group.
-  (add-hook 'gnus-select-group-hook 'gnus-group-set-timestamp)
+  (add-hook 'gnus-select-group-hook #'gnus-group-set-timestamp)
 
   (message "[2 Group Buffer... Done]")
 
@@ -417,7 +416,7 @@
 ;;** 3.18 (info "(gnus)Article Treatment")
 
   ;; Change a `\205' figure to "...".
-  (add-hook 'gnus-part-display-hook 'article-treat-dumbquotes)
+  (add-hook 'gnus-part-display-hook #'article-treat-dumbquotes)
 
   ;; What is to be considered a signature.
   (setq gnus-signature-separator
@@ -635,7 +634,7 @@
             (if (not (equal delete group))
                 (message-add-header (concat "Gcc: " group)))))))
 
-  (add-hook 'message-send-hook 'leuven-choose-gcc)
+  (add-hook 'message-send-hook #'leuven-choose-gcc)
 
   ;; Automatically mark Gcc articles (i.e., sent by myself) as read.
   (setq gnus-gcc-mark-as-read t)
@@ -645,7 +644,7 @@
   ;; An alternative to `gnus-posting-styles', if you want to change accounts
   ;; on the fly while composing messages.
   (autoload 'gnus-alias-determine-identity "gnus-alias" nil t)
-  (add-hook 'message-setup-hook 'gnus-alias-determine-identity)
+  (add-hook 'message-setup-hook #'gnus-alias-determine-identity)
 
   (with-eval-after-load "gnus-alias"
 
@@ -727,7 +726,7 @@
     ;;                 (message-field-value "from")))))
     ;;       (setq mail-envelope-from from)))
 
-    (add-hook 'message-setup-hook 'leuven-set-msg-envelope-from)
+    (add-hook 'message-setup-hook #'leuven-set-msg-envelope-from)
     )
 
   ;; Add certain headers before sending messages.
@@ -735,7 +734,7 @@
     ;; For Gmane address obfuscation.
     (message-add-header "X-Archive: encrypt"))
 
-  (add-hook 'message-send-hook 'leuven-message-add-content)
+  (add-hook 'message-send-hook #'leuven-message-add-content)
 
   (message "[5 Composing Messages... Done]")
 
@@ -883,10 +882,6 @@
     ;; Turn on the Org mode table editor (in emails).
     (turn-on-orgtbl)
 
-    ;; ;; Turn on Org-like lists in non-Org buffers.
-    ;; (when (fboundp 'orgalist-mode)
-    ;;   (orgalist-mode 1))
-
     (when (try-require 'org-footnote)
       ;; Default style used for footnoting is local to the Message being
       ;; written.
@@ -896,7 +891,11 @@
       (set (make-local-variable
             'org-footnote-tag-for-non-org-mode-files) nil)))
 
-    (add-hook 'message-mode-hook 'leuven--message-mode-hook 'append)
+    (add-hook 'message-mode-hook #'leuven--message-mode-hook 'append)
+
+    ;; Turn on Org-like lists in non-Org buffers.
+    (when (fboundp 'orgalist-mode)
+      (add-hook 'message-mode-hook #'orgalist-mode))
 
 ;;*** 3.9 (info "(message)Message Buffers")
 
@@ -980,7 +979,7 @@
 
   (with-eval-after-load "dired"
 
-    (add-hook 'dired-mode-hook 'gnus-dired-mode)
+    (add-hook 'dired-mode-hook #'gnus-dired-mode)
 
     (define-key dired-mode-map
       (kbd "a") 'gnus-dired-attach))    ; XXX conflict with
