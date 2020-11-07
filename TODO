@@ -1,0 +1,20 @@
+# Hey Emacs, this is a -*- org -*- file ...
+#+TITLE:     TODO
+
+* Tasks
+
+** Gnus for Google Inbox
+
+Recently, I’ve been using Google Inbox. Since I have previously setup my Google
+account to send and receive mail from my other email accounts, I can use it as
+my primary email service for all of my mail. While Google Inbox isn’t really
+“revolutionary”, it re-evaluates which UI elements of an email client should be
+emphasized. Instead of heavily emphasizing folders, categorization, flagging,
+etc., Inbox values the message list, and your basic activities are: read, act,
+and done. You read the message easily. Then you act on the message. That may
+mean actually dealing with it, or it may mean snoozing it. Once you’ve dealt
+with the message, you hit “Done” and it goes away from your inbox. But, it’s
+never gone for good, and you can always get back to old messages with a simple
+search.
+
+https://github.com/brenns10/emacs/blob/master/gnus.org
