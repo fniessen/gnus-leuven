@@ -4,7 +4,7 @@
 
 ;; Author: Fabrice Niessen <(concat "fniessen" at-sign "pirilampo.org")>
 ;; URL: https://github.com/fniessen/emacs-leuven-theme
-;; Version: 20200507.0741
+;; Version: 20201121.1557
 ;; Keywords: emacs, gnus, dotfile, config
 
 ;;; Code:
@@ -237,7 +237,7 @@
   ;; Create some faces.
   (defface leuven-gnus-date '((t (:foreground "#FF80BF")))
     "Face for date in summary buffer.")
- (defface leuven-gnus-size '((t (:foreground "#8FBF60")))
+  (defface leuven-gnus-size '((t (:foreground "#8FBF60")))
     "Face for size of article in summary buffer.")
 
   (setq gnus-face-7 'gnus-summary-high-unread)
