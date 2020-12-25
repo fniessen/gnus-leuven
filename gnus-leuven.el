@@ -997,7 +997,7 @@
 
   ;; Warn that some packages were missing.
   (dolist (pkg leuven--missing-packages)
-    (message "[WARN- Package `%s' not found]" pkg))
+    (message "[Package `%s' not found]" pkg))
 
   (message "\n")
 
