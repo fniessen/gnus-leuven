@@ -6,7 +6,7 @@
 #+LANGUAGE:  en
 #+OPTIONS:   H:4 num:nil
 
-#+PROPERTY:  header-args :eval never :padline yes :tangle gnus-leuven.el
+#+PROPERTY:  header-args :eval never :padline yes :tangle lisp/gnus-leuven.el
 
 * Overview
 
