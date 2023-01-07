@@ -1,0 +1,3 @@
+#!/bin/sh
+# emacsclient --eval "(progn (message-mail \"$mailto\" \"$prefix $subject\") (insert-file \"$email\") (message-send-and-exit))"
+exec emacsclient -e "(compose-mail \"$1\" \"$2\")"
